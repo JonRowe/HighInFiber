@@ -1,4 +1,4 @@
-!SLIDE
+!SLIDE small
 # Fiber Pool #
 ### Lets use the pool ###
      
@@ -17,7 +17,7 @@
       end
     end
 
-!SLIDE bullets incremental
+!SLIDE small bullets incremental
 # Caveat #
  * The `EventMachine.run` block is why we need the `EM.stop` command
  * We eventually want to drop out of EventMachine
@@ -39,7 +39,7 @@
       end
     end
    
-!SLIDE bullets incremental
+!SLIDE small bullets incremental
 # Fiber Pool #
 
  * We use our convenience method to start our fiber pool

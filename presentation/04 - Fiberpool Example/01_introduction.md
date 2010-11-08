@@ -15,4 +15,4 @@
 # Fiber Pool #
 ### Say we have a blocking operation we want to run concurrently  ###
 ### But we only want to do a certain number at the same time ###
-### Lets invent a pool of worker fibers to do this cooperatively ###
+### Let us invent a pool of worker fibers to do this cooperatively ###

@@ -10,22 +10,82 @@
         self.control_fiber  = Fiber.current
       end
 
-!SLIDE small bullets incremental
+!SLIDE small bullets
 # Fiber Pool #
+    @@@ ruby
+    class FiberPool
+      attr_accessor :fibers, :pool_size, :control_fiber
+
+      def initialize
+        self.pool_size      = 10
+        self.fibers         = []
+        self.control_fiber  = Fiber.current
+      end
+      
 * `pool_size` is going to be our concurrency limit
+
+!SLIDE small bullets
+# Fiber Pool #
+    @@@ ruby
+    class FiberPool
+      attr_accessor :fibers, :pool_size, :control_fiber
+
+      def initialize
+        self.pool_size      = 10
+        self.fibers         = []
+        self.control_fiber  = Fiber.current
+      end
+      
 * `fibers` is going to contain our stack of fibers
+
+
+!SLIDE small bullets
+# Fiber Pool #
+    @@@ ruby
+    class FiberPool
+      attr_accessor :fibers, :pool_size, :control_fiber
+
+      def initialize
+        self.pool_size      = 10
+        self.fibers         = []
+        self.control_fiber  = Fiber.current
+      end
+      
 * `control_fiber` is going to be our scheduler
 
-!SLIDE small bullets incremental
+!SLIDE small bullets
 # Fiber Pool #
+    @@@ ruby
+    class FiberPool
+      attr_accessor :fibers, :pool_size, :control_fiber
+  
+      def initialize
+        self.pool_size      = 10
+        self.fibers         = []
+        self.control_fiber  = Fiber.current
+      end
+
 * `Fiber.current` gets the fiber we are currently in the execution scope of
+
+!SLIDE small bullets
+# Fiber Pool #
+    @@@ ruby
+    class FiberPool
+      attr_accessor :fibers, :pool_size, :control_fiber
+
+      def initialize
+        self.pool_size      = 10
+        self.fibers         = []
+        self.control_fiber  = Fiber.current
+      end
+      
 * If not specifically declared this is the root fiber of ruby itself
 
 !SLIDE small
 # Fiber Pool #
 ### We need some way to add work to our pool ###
       
-!SLIDE small
+!SLIDE small bullets incremental
 # Fiber Pool #
     @@@ ruby
       def add(&block)
@@ -38,12 +98,55 @@
         end
         add_to_pool(fiber)
       end
-
-!SLIDE small bullets incremental
-# Fiber Pool #
+      
  * We create a new fiber to wrap our work item
+
+!SLIDE small bullets
+# Fiber Pool #
+    @@@ ruby
+     def add(&block)
+       fiber = Fiber.new do
+         f = Fiber.current
+         completion_callback = proc do
+           control_fiber.transfer(f)
+         end
+         yield completion_callback
+       end
+       add_to_pool(fiber)
+     end
+
  * The fiber defines a `completion_callback` to transfer execution control back to the control fiber
+
+!SLIDE small bullets
+# Fiber Pool #
+    @@@ ruby
+     def add(&block)
+       fiber = Fiber.new do
+         f = Fiber.current
+         completion_callback = proc do
+           control_fiber.transfer(f)
+         end
+         yield completion_callback
+       end
+       add_to_pool(fiber)
+     end
+ 
  * Which passes itself back to the `control_fiber`
+ 
+!SLIDE small bullets
+# Fiber Pool #
+    @@@ ruby
+     def add(&block)
+       fiber = Fiber.new do
+         f = Fiber.current
+         completion_callback = proc do
+           control_fiber.transfer(f)
+         end
+         yield completion_callback
+       end
+       add_to_pool(fiber)
+     end
+ 
  * Our fiber then calls the block with `completion_callback` to perform our work
 
 !SLIDE small bullets incremental
@@ -52,7 +155,7 @@
  * We add it to the pool
  * The fiber has not yet been run
 
-!SLIDE small
+!SLIDE small bullets
 # Fiber Pool #
 
     @@@ ruby
@@ -61,12 +164,43 @@
       fibers << fiber
       fiber.resume
     end
-      
-!SLIDE small bullets incremental
-# Fiber Pool #
+
  * `add_to_pool` first checks to see if the pool is `over_capacity?`
+
+!SLIDE small bullets
+# Fiber Pool #
+
+    @@@ ruby
+    def add_to_pool(fiber)
+      wait_for_free_pool_space if over_capacity?
+      fibers << fiber
+      fiber.resume
+    end
+
  * If it is we `wait_for_free_pool_space`
+
+!SLIDE small bullets
+# Fiber Pool #
+
+    @@@ ruby
+    def add_to_pool(fiber)
+      wait_for_free_pool_space if over_capacity?
+      fibers << fiber
+      fiber.resume
+    end
+
  * Otherwise we add our fiber into our pool
+        
+!SLIDE small bullets
+# Fiber Pool #
+
+    @@@ ruby
+    def add_to_pool(fiber)
+      wait_for_free_pool_space if over_capacity?
+      fibers << fiber
+      fiber.resume
+    end
+    
  * And then we execute it
  
 !SLIDE small
@@ -113,7 +247,7 @@
   * Remember that our `completion_callback` returns our fiber
   * The idea is that when our work has finished it calls our `completion_callback`
   * Which returns control to the `control_fiber`
-  * Which then pops out the completed fiber to
+  * Which then pops out the completed fiber to the `Fiber.yield` in `wait_for_next_complete_fiber`
 
 
 !SLIDE small

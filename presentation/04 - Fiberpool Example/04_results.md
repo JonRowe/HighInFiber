@@ -1,6 +1,6 @@
 !SLIDE bullets incremental
 # The result?
- * For comparison lets look at it conventionally first
+### For comparison lets look at it conventionally first ###
  
 !SLIDE
 # The result?

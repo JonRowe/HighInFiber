@@ -6,7 +6,7 @@
     { "section":"02 - Threads Vs Fibers" },
     { "section":"03 - Simple Example" },
     { "section":"04 - Fiberpool Example" },
-    { "section":"05 - EventMachine" },
+    { "section":"05 - Control" },
     { "section":"06 - Summary" }
   ]
 }
