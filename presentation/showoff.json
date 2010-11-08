@@ -5,6 +5,7 @@
     { "section":"01 - Introduction" },
     { "section":"02 - Threads Vs Fibers" },
     { "section":"03 - Examples" },
-    { "section":"04 - Summary" }
+    { "section":"04 - Fiberpool Example" },
+    { "section":"05 - Summary" }
   ]
 }

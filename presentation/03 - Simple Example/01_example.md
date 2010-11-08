@@ -32,7 +32,7 @@
 
 # What does that do? #
 
- * Once executed the Fiber follows normal behaviour
+ * Once executed the fiber follows normal behaviour
  * Until it reaches `Fiber.yield`
  * Upon which it "returns" the passed parameter
  * Which drops out the resume
