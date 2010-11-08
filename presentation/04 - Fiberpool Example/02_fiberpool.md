@@ -10,18 +10,18 @@
         self.control_fiber  = Fiber.current
       end
 
-!SLIDE bullets incremental
+!SLIDE small bullets incremental
 # Fiber Pool #
 * `pool_size` is going to be our concurrency limit
 * `fibers` is going to contain our stack of fibers
 * `control_fiber` is going to be our scheduler
 
-!SLIDE bullets incremental
+!SLIDE small bullets incremental
 # Fiber Pool #
 * `Fiber.current` gets the fiber we are currently in the execution scope of
 * If not specifically declared this is the root fiber of ruby itself
 
-!SLIDE
+!SLIDE small
 # Fiber Pool #
 ### We need some way to add work to our pool ###
       
@@ -46,7 +46,7 @@
  * Which passes itself back to the `control_fiber`
  * Our fiber then calls the block with `completion_callback` to perform our work
 
-!SLIDE bullets incremental
+!SLIDE small bullets incremental
 # Fiber Pool #
  * Once the fiber is setup
  * We add it to the pool
@@ -62,7 +62,7 @@
       fiber.resume
     end
       
-!SLIDE bullets incremental
+!SLIDE small bullets incremental
 # Fiber Pool #
  * `add_to_pool` first checks to see if the pool is `over_capacity?`
  * If it is we `wait_for_free_pool_space`
@@ -81,7 +81,7 @@
         Fiber.yield
       end
 
-!SLIDE bullets incremental
+!SLIDE small bullets incremental
 # Fiber Pool #
 
  * `wait_for_free_pool_space` does two things
@@ -107,7 +107,7 @@
       add_to_pool(fiber)
     end
      
-!SLIDE bullets incremental
+!SLIDE small bullets incremental
 # Fiber Pool #
 
   * Remember that our `completion_callback` returns our fiber
@@ -124,7 +124,7 @@
       Fiber.yield
     end
 
-!SLIDE bullets incremental
+!SLIDE small bullets incremental
 # Fiber Pool #
 
  * Now we can add fibers to our pool
@@ -153,7 +153,7 @@
         fibers.size > 0
       end
 
-!SLIDE bullets incremental
+!SLIDE small bullets incremental
 # Fiber Pool #
 
  * `fibers_left_to_process?` we haven't used that anywhere?
@@ -166,7 +166,7 @@
       wait_for_free_pool_space while fibers_left_to_process?
     end
 
-!SLIDE bullets incremental
+!SLIDE small bullets incremental
 # Fiber Pool #
 
  * Once we have finished adding work to our pool we need someway to handle the remaining finishing fibers
@@ -180,13 +180,13 @@
       wait_for_free_pool_space while fibers_left_to_process?
     end
 
-!SLIDE bullets incremental
+!SLIDE small bullets incremental
 # Fiber Pool #
 
  * All we are doing here is checking if there are fibers still ticking
  * And waiting until they are finished
 
-!SLIDE bullets incremental
+!SLIDE small bullets incremental
 # Fiber Pool #
 
   * Now we can use our fiber pool
@@ -207,7 +207,7 @@
       end
     end
     
-!SLIDE bullets incremental
+!SLIDE small bullets incremental
 # Fiber Pool #
 
  * We create the fiber which is to be our `control_fiber`
@@ -215,7 +215,7 @@
  * We yield that pool to whatever code we are setting up
  
  
-!SLIDE bullets incremental
+!SLIDE small bullets incremental
 # Fiber Pool #
  
  * We drain the pool
