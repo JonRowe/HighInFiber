@@ -4,8 +4,9 @@
   [
     { "section":"01 - Introduction" },
     { "section":"02 - Threads Vs Fibers" },
-    { "section":"03 - Examples" },
+    { "section":"03 - Simple Example" },
     { "section":"04 - Fiberpool Example" },
-    { "section":"05 - Summary" }
+    { "section":"05 - EventMachine" },
+    { "section":"06 - Summary" }
   ]
 }
