@@ -4,7 +4,10 @@
  * http://www.igvita.com/2009/05/13/fibers-cooperative-scheduling-in-ruby/
  * http://pragdave.blogs.pragprog.com/pragdave/2007/12/pipelines-using.html
  * http://pragdave.blogs.pragprog.com/pragdave/2008/01/pipelines-using.html
+ 
+!SLIDE small bullets
+## References ##
  * http://www.igvita.com/2010/03/22/untangling-evented-code-with-ruby-fibers/
  * http://www.igvita.com/2009/05/13/fibers-cooperative-scheduling-in-ruby/
- * https://github.com/oldmoe/neverblock
- * https://github.com/igrigorik << author of many of the event machine plugins
+ * http://github.com/oldmoe/neverblock
+ * http://github.com/igrigorik << author of many of the event machine plugins
