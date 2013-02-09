@@ -6,7 +6,7 @@ GEM
     bluecloth (2.2.0)
     eventmachine (1.0.0)
     excon (0.16.10)
-    gli (2.5.4)
+    gli (1.6.0)
     heroku (2.35.0)
       heroku-api (~> 0.3.7)
       launchy (>= 0.3.2)
@@ -48,6 +48,7 @@ PLATFORMS
 
 DEPENDENCIES
   eventmachine
+  gli (= 1.6.0)
   heroku
   pdfkit
   showoff
