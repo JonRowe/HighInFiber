@@ -297,7 +297,9 @@
 # Fiber Pool #
     @@@ ruby
     def drain
-      wait_for_free_pool_space while fibers_left_to_process?
+	  while fibers_left_to_process?
+	    wait_for_free_pool_space 
+	  end
     end
 
 !SLIDE small bullets incremental
@@ -311,7 +313,9 @@
 # Fiber Pool #
     @@@ ruby
     def drain
-      wait_for_free_pool_space while fibers_left_to_process?
+      while fibers_left_to_process?
+	    wait_for_free_pool_space
+	  end
     end
 
 !SLIDE small bullets incremental
