@@ -14,7 +14,7 @@ GEM
     parslet (1.8.2)
     pdfkit (0.8.7.2)
     racc (1.6.1)
-    rack (2.2.6.2)
+    rack (2.2.6.3)
     rack-protection (3.0.4)
       rack
     ruby2_keywords (0.0.5)
